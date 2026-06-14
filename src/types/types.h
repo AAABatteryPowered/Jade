@@ -21,16 +21,3 @@ typedef struct jd_value {
         bool   v_bool;
     };
 } jd_value;
-
-// JD Dict
-
-typedef struct jd_dict_entry {
-    char* key;
-    jd_value* val;
-} jd_dict_entry;
-
-typedef struct jd_dict {
-    jd_dict_entry *entries;
-    int len;
-    int cap;
-} jd_dict;

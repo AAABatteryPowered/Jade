@@ -2,8 +2,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 #include <stdbool.h>
 
 // Local
 #include "src/types/types.h"
+#include "src/types/dict/dict.h"
+#include "src/types/array/array.h"
