@@ -91,7 +91,7 @@ int jd_dict_set(jd_dict *dict, jd_dict_entry *entry) {
     int index = jd_dict_index(dict, entry->key);
     if (index == -1) {
         if ((dict->len) == dict->cap) {
-            dict->cap *= 2;
+            dict->cap = (dict->cap == 0) ? 8 : dict->cap * 2;
             jd_dict_entry *tmp = realloc(dict->entries, dict->cap * sizeof(jd_dict_entry));
             if (tmp == NULL) return -1;
             dict->entries = tmp;
