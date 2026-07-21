@@ -21,7 +21,7 @@ char* serialize_jade();
 
 
 int main() {
-    jd_array objects = jd_array_new(8);
+    /*jd_array objects = jd_array_new(8);
 
     for (int i=0;i<100;i++) {
         char *key = malloc(6);
@@ -33,7 +33,19 @@ int main() {
         //jd_dict_set(&objects, &entry);
     }
 
-    jd_array_print(&objects, 100);
+    jd_array_print(&objects, 100);*/
+
+    Lexer *lexer = &(Lexer){0};
+    lexer_init(lexer, NULL);
+    lexer_from_file(lexer, "file.json");
+
+    TokenList tokens = lexer_tokenise(lexer, (size_t)1024);
+
+    printf("%zu\n", tokens.tokens_len);
+    for (int i=0; i < tokens.tokens_len; i++) {
+        printf("%i", tokens.tokens[i].type);
+        printf("%s", tokens.tokens[i].value);
+    }
 
     return 0;
 }

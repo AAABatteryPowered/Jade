@@ -1,1 +1,27 @@
-      
+{
+    "name": "Jade",
+    "version": 1,
+    "active": true,
+    "settings": {
+        "theme": "dark",
+        "volume": 80
+    },
+    "players": [
+        {
+            "name": "Alex",
+            "score": 1500,
+            "online": true
+        },
+        {
+            "name": "Sam",
+            "score": 1200,
+            "online": false
+        }
+    ],
+    "tags": [
+        "json",
+        "lexer",
+        "parser"
+    ],
+    "description": null
+}
