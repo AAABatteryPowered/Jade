@@ -17,7 +17,20 @@
 
 char* serialize_jade();
 
-
+const char *token_type_names[] = {
+    "{",
+    "}",
+    "[",
+    "]",
+    ":",
+    ",",
+    "STRING",
+    "NUMBER",
+    "TRUE",
+    "FALSE",
+    "NULL",
+    "EOF"
+};
 
 
 int main() {
@@ -35,7 +48,7 @@ int main() {
 
     jd_array_print(&objects, 100);*/
 
-    Lexer *lexer = &(Lexer){0};
+    Lexer *lexer = &(Lexer){0}; 
     lexer_init(lexer, NULL);
     lexer_from_file(lexer, "file.json");
 
@@ -43,9 +56,15 @@ int main() {
 
     printf("%zu\n", tokens.tokens_len);
     for (int i=0; i < tokens.tokens_len; i++) {
-        printf("%i", tokens.tokens[i].type);
-        printf("%s", tokens.tokens[i].value);
+        if (tokens.tokens[i].value != NULL) {
+            printf("%s", tokens.tokens[i].value);
+        } else {
+            printf("%s", token_type_names[tokens.tokens[i].type]);
+        }
+        //printf("%i", tokens.tokens[i].type);
     }
+
+    free(tokens.tokens);
 
     return 0;
 }

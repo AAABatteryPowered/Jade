@@ -42,6 +42,8 @@ TokenList lexer_tokenise(Lexer *lexer, const size_t max_tokens) {
     Token *tokens = malloc(sizeof(Token) * max_tokens);
     size_t tokens_len = 0;
 
+    //return (TokenList){0,0};
+
     while (lexer->pos < len) {
         char current = lexer->src[lexer->pos];
 
@@ -69,20 +71,29 @@ TokenList lexer_tokenise(Lexer *lexer, const size_t max_tokens) {
                 current = lexer->src[lexer->pos];
             }
 
+            reading[reading_len] = '\0';
+
             tokens[tokens_len++] = (Token){TOKEN_STRING, reading};
+            lexer->pos++;
             
             continue;
-        } else if (isdigit((unsigned char)current)) {
+        } else if (isdigit((unsigned char)current) || current == '-') {
             char* reading = malloc(1024);;
             size_t reading_len = 0;
 
-            while (isdigit((unsigned char)current)) {
+            while (isdigit((unsigned char)current) || current == '-' || current == '+' || current == '.' || current == 'e') {
                 reading[reading_len++] = current;
                 lexer->pos++;
                 current = lexer->src[lexer->pos];
             }
 
-            tokens[tokens_len++] = (Token){TOKEN_NUMBER, reading};
+            char *end;
+            strtod(reading, &end);
+            if (*end == '\0') {
+                tokens[tokens_len++] = (Token){TOKEN_NUMBER, reading};
+            } else {
+                tokens[tokens_len++] = (Token){TOKEN_ERROR, "Invalid Number"};
+            }
             
             continue;
         } else if (isalpha(current)) {
