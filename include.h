@@ -12,4 +12,5 @@
 #include "src/types/array/array.h"
 
 #include "src/lexer/lexer.h"
+#include "src/parser/parser.h"
 #include "src/token/token.h"

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../../include.h"
-#include "../token/token.h"
 
-typedef struct Parser {
-    TokenList *tokens;
-} Parser;
+static jd_value parse_token(TokenList *tokens, int *current);
+static jd_array parse_array(TokenList *tokens, int *current);
+static jd_dict parse_dict(TokenList *tokens, int *current);
 
-void parser_init(Lexer *lexer, TokenList *tokens);
-void parser_parse(Parser *parser);
+static Token next_token(TokenList *tokens, int *current);
+
+void parse_tokens(TokenList *tokens);

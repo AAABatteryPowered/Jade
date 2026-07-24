@@ -17,22 +17,6 @@
 
 char* serialize_jade();
 
-const char *token_type_names[] = {
-    "{",
-    "}",
-    "[",
-    "]",
-    ":",
-    ",",
-    "STRING",
-    "NUMBER",
-    "TRUE",
-    "FALSE",
-    "NULL",
-    "EOF"
-};
-
-
 int main() {
     /*jd_array objects = jd_array_new(8);
 
@@ -54,15 +38,17 @@ int main() {
 
     TokenList tokens = lexer_tokenise(lexer, (size_t)1024);
 
-    printf("%zu\n", tokens.tokens_len);
-    for (int i=0; i < tokens.tokens_len; i++) {
-        if (tokens.tokens[i].value != NULL) {
-            printf("%s", tokens.tokens[i].value);
-        } else {
-            printf("%s", token_type_names[tokens.tokens[i].type]);
-        }
+    parse_tokens(&tokens);
+
+   // printf("%zu\n", tokens.tokens_len);
+    //for (int i=0; i < tokens.tokens_len; i++) {
+     //   if (tokens.tokens[i].value != NULL) {
+      //      printf("%s", tokens.tokens[i].value);
+       // } else {
+        //    printf("%s", token_type_names[tokens.tokens[i].type]);
+       // }
         //printf("%i", tokens.tokens[i].type);
-    }
+    //}
 
     free(tokens.tokens);
 

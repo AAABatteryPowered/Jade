@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../include.h"
+
 // JD Value
 
 typedef enum {
@@ -12,6 +14,8 @@ typedef enum {
     JD_DICT,
 } jd_type;
 
+typedef struct jd_array jd_array;
+
 typedef struct jd_value {
     jd_type type;
     union {
@@ -19,5 +23,6 @@ typedef struct jd_value {
         float  v_float;
         char  *v_string;
         bool   v_bool;
+        jd_array *v_array;
     };
 } jd_value;

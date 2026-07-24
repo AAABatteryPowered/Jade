@@ -21,8 +21,6 @@ typedef enum {
     TOKEN_ERROR,
 } Token_type;
 
-extern const char *token_type_names[];
-
 typedef struct Token {
     Token_type type;
     char *value;
