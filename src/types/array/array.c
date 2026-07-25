@@ -28,37 +28,15 @@ int jd_array_index(jd_array *array, jd_value* value) {
 void jd_array_print(jd_array *array, int max) {
     printf("[jade] Length: %d\n[jade] Cap: %d\n", array->len, array->cap);
 
-    if (max > array->len) {
+    if (max > array->len || max == -1) {
         max = array->len;
     }
 
-    for (int i = 0; i < max; i++) {
-        jd_value value = array->entries[i];
+    for (int i=0; i < max; i++) {
         printf("[jade] [%d] -> ", i);
-        switch (value.type) {
-        case JD_INT:
-            printf("%d", value.v_int);
-            break;
-
-        case JD_STRING:
-            printf("\"%s\"", value.v_string);
-            break;
-
-        case JD_BOOL:
-            printf(value.v_bool ? "true" : "false");
-            break;
-
-        case JD_NULL:
-            printf("null");
-            break;
-
-        default:
-            printf("<unknown>");
-            break;
-        }
-        printf("\n");
+        jd_value_print(&(array->entries[i]));
     }
-
+    
     int remaining = array->len - max;
     if (remaining > 0) {
         printf("%d Entries Remain Unprinted\n", remaining);
@@ -67,12 +45,17 @@ void jd_array_print(jd_array *array, int max) {
 
 // Constructors
 
-jd_array jd_array_new(int size) {
-    jd_array array;
+jd_array *jd_array_new(int size) {
+    jd_array *array = malloc(sizeof(jd_array));
 
-    array.cap = next_power_of_2(size);
-    array.entries = malloc(array.cap * sizeof(jd_value));
-    array.len = 0;
+    if (array == NULL) return NULL;
+
+    array->cap = next_power_of_2(size);
+    array->entries = malloc(array->cap * sizeof(jd_value));
+
+    if (array->entries == NULL) return NULL;
+
+    array->len = 0;
     
     return array;
 }

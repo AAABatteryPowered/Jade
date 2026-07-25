@@ -14,7 +14,7 @@ int jd_array_index(jd_array *array, jd_value* value);
 void jd_array_print(jd_array *array, int max);
 
 // Constructors
-jd_array jd_array_new(int size);
+jd_array *jd_array_new(int size);
 
 // Methods
 int jd_array_append(jd_array *array, jd_value *entry);

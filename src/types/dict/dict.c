@@ -27,35 +27,14 @@ static inline int next_power_of_2(int x)
 void jd_dict_print(jd_dict *dict, int max) {
     printf("[jade] Length: %d\n[jade] Cap: %d\n", dict->len, dict->cap);
 
-    if (max > dict->len) {
+    if (max > dict->len || max == -1) {
         max = dict->len;
     }
 
-    for (int i = 0; i < max; i++) {
-        jd_value value = dict->entries[i].val;
+    for (int i=0; i < max; i++) {
         printf("[jade] [%d] %s -> ", i, dict->entries[i].key);
-        switch (value.type) {
-        case JD_INT:
-            printf("%d", value.v_int);
-            break;
-
-        case JD_STRING:
-            printf("\"%s\"", value.v_string);
-            break;
-
-        case JD_BOOL:
-            printf(value.v_bool ? "true" : "false");
-            break;
-
-        case JD_NULL:
-            printf("null");
-            break;
-
-        default:
-            printf("<unknown>");
-            break;
-        }
-        printf("\n");
+        
+        jd_value_print(&(dict->entries[i].val));
     }
 
     int remaining = dict->len - max;
@@ -67,12 +46,17 @@ void jd_dict_print(jd_dict *dict, int max) {
 // Constructors
 #define jd_dict() &(jd_dict){malloc(8 * sizeof(jd_dict_entry)), 0, 8}
 
-jd_dict jd_dict_new(int size) {
-    jd_dict dict;
+jd_dict *jd_dict_new(int size) {
+    jd_dict *dict = malloc(sizeof(jd_dict));
 
-    dict.cap = next_power_of_2(size);
-    dict.entries = malloc(dict.cap * sizeof(jd_dict_entry));
-    dict.len = 0;
+    if (dict == NULL) return NULL;
+
+    dict->cap = next_power_of_2(size);
+    dict->entries = malloc(dict->cap * sizeof(jd_dict_entry));
+
+    if (dict->entries == NULL) return NULL;
+
+    dict->len = 0;
     
     return dict;
 }

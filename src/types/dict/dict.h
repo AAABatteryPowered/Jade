@@ -18,7 +18,7 @@ typedef struct jd_dict {
 void jd_dict_print(jd_dict *dict, int max);
 
 // Constructors
-jd_dict jd_dict_new(int size);
+jd_dict *jd_dict_new(int size);
 
 // Methods
 jd_value* jd_dict_get(jd_dict *dict, char* key);

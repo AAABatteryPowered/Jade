@@ -7,7 +7,7 @@
 #include <ctype.h>
 
 // Local
-#include "src/types/types.h"
+#include "src/types/value/value.h"
 #include "src/types/dict/dict.h"
 #include "src/types/array/array.h"
 

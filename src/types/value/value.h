@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../include.h"
+#include "../../../include.h"
 
 // JD Value
 
@@ -15,6 +15,7 @@ typedef enum {
 } jd_type;
 
 typedef struct jd_array jd_array;
+typedef struct jd_dict jd_dict;
 
 typedef struct jd_value {
     jd_type type;
@@ -24,5 +25,8 @@ typedef struct jd_value {
         char  *v_string;
         bool   v_bool;
         jd_array *v_array;
+        jd_dict *v_dict;
     };
 } jd_value;
+
+void jd_value_print(jd_value *value);

@@ -1,8 +1,8 @@
 #include "include.h"
 
 // Functionality:
-// Parse from files
-// Parse from *char
+// Parse from files DONE
+// Parse from *char DONE
 // Data Type and Good way of representing in C DONE
 // Error Handling (return error object)
 // Serializing to *char
