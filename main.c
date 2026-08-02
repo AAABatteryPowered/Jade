@@ -38,8 +38,12 @@ int main() {
 
     TokenList tokens = lexer_tokenise(lexer, (size_t)1024);
 
-    parse_tokens(&tokens);
+    jd_value json_object = parse_tokens(&tokens);
 
+    char *mystring = serialize_array( *jd_dict_get(json_object.v_dict, "tags")->v_array );
+
+    printf("%s", mystring);
+    
    // printf("%zu\n", tokens.tokens_len);
     //for (int i=0; i < tokens.tokens_len; i++) {
      //   if (tokens.tokens[i].value != NULL) {

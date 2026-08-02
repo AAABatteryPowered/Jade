@@ -102,11 +102,11 @@ static jd_dict *parse_dict(TokenList *tokens, int *current) {
     return dict;
 }
 
-void parse_tokens(TokenList *tokens) {
+jd_value parse_tokens(TokenList *tokens) {
     int current = 0;
     jd_value full_node = parse_token(tokens, &current);
 
-    jd_dict_print(full_node.v_dict, 100);
+    return full_node;
     //THE SEGFAULT IS IN DICT PRINT I REPEAT THE SEGFAULT IS IN JD_dict_print
     
 } 

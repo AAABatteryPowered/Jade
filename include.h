@@ -13,4 +13,5 @@
 
 #include "src/lexer/lexer.h"
 #include "src/parser/parser.h"
+#include "src/serializer/serializer.h"
 #include "src/token/token.h"

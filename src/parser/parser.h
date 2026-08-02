@@ -8,4 +8,4 @@ static jd_dict *parse_dict(TokenList *tokens, int *current);
 
 static Token next_token(TokenList *tokens, int *current);
 
-void parse_tokens(TokenList *tokens);
+jd_value parse_tokens(TokenList *tokens);
