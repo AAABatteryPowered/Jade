@@ -40,9 +40,9 @@ int main() {
 
     jd_value json_object = parse_tokens(&tokens);
 
-    char *mystring = serialize_array( *jd_dict_get(json_object.v_dict, "tags")->v_array );
+    char *myjsonstring = serialize_dictionary(json_object.v_dict);
 
-    printf("%s", mystring);
+    printf("%s", myjsonstring);
     
    // printf("%zu\n", tokens.tokens_len);
     //for (int i=0; i < tokens.tokens_len; i++) {

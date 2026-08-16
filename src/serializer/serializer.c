@@ -1,5 +1,11 @@
 #include "../../include.h"
 
+size_t get_ser_val_size(jd_value *val) {}
+
+size_t get_ser_arr_size(jd_value *val) {}
+
+size_t get_ser_dict_size(jd_value *val) {}
+
 char *serialize_value(jd_value value) {
     char *returning = NULL;
 
@@ -32,12 +38,31 @@ char *serialize_value(jd_value value) {
     return returning;
 }
 
-char *serialize_dictionary() {
-    
+char *serialize_dictionary(jd_dict dict) {
+    char* serialized_dict = malloc(256);
+    if (serialized_dict == NULL) return NULL;
+    serialized_dict[0] = '{';
+    serialized_dict[1] = '\0';
+
+    for (int i=0; i<dict.len; i++) {
+        jd_dict_entry entry = dict.entries[i];
+        char *key = entry.key;
+        char *serialized_value = serialize_value(entry.val);
+        strcat(serialized_dict, key);
+        strcat(serialized_dict, ":");
+        strcat(serialized_dict, serialized_value);
+
+        if (i+1 < dict.len) strcat(serialized_dict, ",");
+    }
+
+    strcat(serialized_dict, "}");
+
+    return serialized_dict;
 }
 
 char *serialize_array(jd_array array) {
     char *serialized_children = malloc(256);
+    if (serialized_children == NULL) return NULL;
     serialized_children[0] = '[';
 
     for (int i=0; i<array.len; i++) {
@@ -50,8 +75,4 @@ char *serialize_array(jd_array array) {
     strcat(serialized_children, "]");
 
     return serialized_children;
-}
-
-void serialize_string(char *string) {
-
 }
